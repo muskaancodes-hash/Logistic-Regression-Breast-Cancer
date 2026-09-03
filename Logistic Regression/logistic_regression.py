@@ -64,3 +64,17 @@ X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
 
 print("\nFeatures standardized successfully!")
+# Train Logistic Regression model
+from sklearn.linear_model import LogisticRegression
+
+model = LogisticRegression(max_iter=1000)
+
+model.fit(X_train, y_train)
+
+print("\nLogistic Regression model trained successfully!")
+
+# Make predictions
+y_pred = model.predict(X_test)
+
+print("\nPredictions:")
+print(y_pred[:10])
