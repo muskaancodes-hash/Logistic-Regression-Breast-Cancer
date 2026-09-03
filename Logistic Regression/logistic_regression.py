@@ -78,3 +78,39 @@ y_pred = model.predict(X_test)
 
 print("\nPredictions:")
 print(y_pred[:10])
+# Part 4: Model Evaluation
+
+from sklearn.metrics import (
+    confusion_matrix,
+    ConfusionMatrixDisplay,
+    precision_score,
+    recall_score,
+    roc_auc_score,
+    roc_curve
+)
+
+# Confusion Matrix
+cm = confusion_matrix(y_test, y_pred)
+
+print("\nConfusion Matrix:")
+print(cm)
+
+# Display Confusion Matrix
+disp = ConfusionMatrixDisplay(confusion_matrix=cm)
+disp.plot()
+plt.title("Confusion Matrix")
+plt.show()
+
+# Precision
+precision = precision_score(y_test, y_pred)
+
+# Recall
+recall = recall_score(y_test, y_pred)
+
+# ROC-AUC
+y_probability = model.predict_proba(X_test)[:, 1]
+roc_auc = roc_auc_score(y_test, y_probability)
+
+print("\nPrecision:", precision)
+print("Recall:", recall)
+print("ROC-AUC:", roc_auc)
