@@ -114,3 +114,39 @@ roc_auc = roc_auc_score(y_test, y_probability)
 print("\nPrecision:", precision)
 print("Recall:", recall)
 print("ROC-AUC:", roc_auc)
+# Part 5: ROC Curve and Threshold Tuning
+
+# Calculate ROC curve
+fpr, tpr, thresholds = roc_curve(y_test, y_probability)
+
+# Plot ROC Curve
+plt.figure()
+plt.plot(fpr, tpr)
+plt.plot([0, 1], [0, 1], linestyle="--")
+plt.xlabel("False Positive Rate")
+plt.ylabel("True Positive Rate")
+plt.title("ROC Curve")
+plt.show()
+
+# Threshold tuning
+threshold = 0.40
+
+y_pred_threshold = (y_probability >= threshold).astype(int)
+
+print("\nThreshold:", threshold)
+
+print("\nPredictions after threshold tuning:")
+print(y_pred_threshold[:10])
+
+# Precision and Recall after threshold tuning
+precision_threshold = precision_score(y_test, y_pred_threshold)
+recall_threshold = recall_score(y_test, y_pred_threshold)
+
+print("\nPrecision after threshold tuning:", precision_threshold)
+print("Recall after threshold tuning:", recall_threshold)
+
+# Sigmoid function explanation
+print("\nSigmoid Function:")
+print("Logistic Regression converts the model output into a probability")
+print("between 0 and 1 using the sigmoid function.")
+print("A threshold is then used to convert probability into a class.")
