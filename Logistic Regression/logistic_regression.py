@@ -35,3 +35,32 @@ print(df.head())
 
 print("\nFinal shape:")
 print(df.shape)
+# Separate features and target
+X = df.drop("diagnosis", axis=1)
+y = df["diagnosis"]
+
+# Train-test split
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.2,
+    random_state=42,
+    stratify=y
+)
+
+print("\nTraining data shape:")
+print(X_train.shape)
+
+print("\nTesting data shape:")
+print(X_test.shape)
+
+# Standardize features
+scaler = StandardScaler()
+
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+
+print("\nFeatures standardized successfully!")
